@@ -8,7 +8,8 @@ class MoviesController < ApplicationController
 
   def index
      
-     #   debugger
+     #puts params
+      #  debugger
 
     if params[:sort] == "title"
     
