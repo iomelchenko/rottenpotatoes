@@ -14,11 +14,12 @@ class MoviesController < ApplicationController
     if params[:sort] == "title"
     
          @movies = Movie.order("title")
+         @title_header = 'hilite'
     
     elsif params[:sort] == 'release_date'
       
          @movies = Movie.order("release_date")
-    
+         @date_header = 'hilite'
     else 
     
          @movies = Movie.all
