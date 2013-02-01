@@ -10,6 +10,8 @@ class MoviesController < ApplicationController
      
      #puts params
      #debugger
+    @all_ratings = Movie.select("rating").group("rating")
+
 
     if params[:sort] == "title"
     
