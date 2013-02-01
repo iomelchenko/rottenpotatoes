@@ -16,7 +16,9 @@ class MoviesController < ApplicationController
       #@movies = Movie.all
      # @movies = Movie.order('release_date')
     #end  
-      @movies = Movie.order(params[:sort])
+
+      debugger
+      @movies = Movie.order("release_date")
 
      # @movies = Movie.find(:all, :order => params[:sort])
 
