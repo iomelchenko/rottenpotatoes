@@ -7,19 +7,26 @@ class MoviesController < ApplicationController
   end
 
   def index
-    if params[:id] == 'title_header'
-       @movies = Movie.order('title')
-    elsif params[:id] == 'release_date_header'
-      
-       @movies = Movie.order("release_date")
-    else 
-      @movies = Movie.all
-    end  
-      #@movies = Movie.order(params[:sort])
+     
+     #puts params
+     #debugger
+    @all_ratings = Movie.select("rating").group("rating")
 
-    #@movies = Movie.all
-    #@movies = Movie.find(:all, :order => "title")
-    #@movies = Movie.find(:all, :order => "release_date")
+
+    if params[:sort] == "title"
+    
+         @movies = Movie.order("title")
+         @title_header = 'hilite'
+    
+    elsif params[:sort] == 'release_date'
+      
+         @movies = Movie.order("release_date")
+         @date_header = 'hilite'
+    else
+    
+         @movies = Movie.all
+     
+    end
   end
 
   def new
