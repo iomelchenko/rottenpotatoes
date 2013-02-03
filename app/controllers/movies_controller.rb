@@ -9,23 +9,29 @@ class MoviesController < ApplicationController
   end
 
   def index
-     
+     @raits = if params[:ratings]
+       params[:ratings].to_a.flatten.uniq
+     else 
+      []
+     end
+
+     #@all_ratings = Movie.all_ratings(params[:ratings])
      @all_ratings = Movie.all_ratings
      
 
 
     if params[:sort] == "title"
     
-         @movies = Movie.order("title")
+         @movies = Movie.order("title").where(rating: @raits)
          @title_header = 'hilite'
     
     elsif params[:sort] == 'release_date'
       
-         @movies = Movie.order("release_date")
+         @movies = Movie.order("release_date").where(rating: @raits)
          @date_header = 'hilite'
     else
     
-         @movies = Movie.all
+         @movies = Movie.where(rating: @raits)
      
     end
   end
