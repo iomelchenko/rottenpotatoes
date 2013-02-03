@@ -9,21 +9,28 @@ class MoviesController < ApplicationController
   end
 
   def index
-#binding.pry
+
      @all_ratings = Movie.all_ratings
 
-     @raits = if params[:ratings]
-       params[:ratings].to_a.flatten.uniq
-     else 
-      @all_ratings
+     if params[:ratings]
+       @raits = params[:ratings].to_a.flatten.uniq
+     
+     elsif !params[:ratings] && session[:ratings]
+
+       @raits = session[:ratings].to_a.flatten.uniq
+     
+    else
+
+       @raits = @all_ratings
      end
-    
+ # binding.pry  
 
     if (session[:sort] == "title" && params[:sort] == nil) || params[:sort] == "title"
     
          @movies = Movie.order("title").where(rating: @raits)
          @title_header = 'hilite'
          session[:sort] = "title"
+
     
     elsif (session[:sort] == "release_date" && params[:sort] == nil) || params[:sort] == "release_date"
       
@@ -35,6 +42,7 @@ class MoviesController < ApplicationController
          @movies = Movie.where(rating: @raits)
      
     end
+    session[:ratings] = params[:ratings]
   end
 
   def new
