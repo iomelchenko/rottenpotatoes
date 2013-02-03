@@ -22,27 +22,32 @@ class MoviesController < ApplicationController
     else
 
        @raits = @all_ratings
-     end
+
+    end
  # binding.pry  
 
     if (session[:sort] == "title" && params[:sort] == nil) || params[:sort] == "title"
     
-         @movies = Movie.order("title").where(rating: @raits)
+         sorted = "title"
          @title_header = 'hilite'
-         session[:sort] = "title"
-
     
     elsif (session[:sort] == "release_date" && params[:sort] == nil) || params[:sort] == "release_date"
       
-         @movies = Movie.order("release_date").where(rating: @raits)
+         sorted = "release_date"
          @date_header = 'hilite'
-         session[:sort] = "release_date"
     else
+         sorted = 1
     
-         @movies = Movie.where(rating: @raits)
-     
     end
-    session[:ratings] = params[:ratings]
+
+#binding.pry 
+
+
+        session[:sort] = sorted if session[:sort] != params[:sort] && params[:sort] != nil
+        session[:ratings] = params[:ratings] if session[:ratings] != params[:ratings] && params[:ratings] != nil
+        #redirect_to :sort => sorted, :ratings => @raits and return
+        @movies = Movie.order(sorted).where(rating: @raits)
+        #redirect_to movie_path(@movie)
   end
 
   def new
