@@ -9,15 +9,15 @@ class MoviesController < ApplicationController
   end
 
   def index
+
+     @all_ratings = Movie.all_ratings
+
      @raits = if params[:ratings]
        params[:ratings].to_a.flatten.uniq
      else 
-      []
+      @all_ratings
      end
-
-     #@all_ratings = Movie.all_ratings(params[:ratings])
-     @all_ratings = Movie.all_ratings
-     
+    
 
 
     if params[:sort] == "title"
