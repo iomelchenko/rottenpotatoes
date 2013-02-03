@@ -10,23 +10,4 @@ class Movie < ActiveRecord::Base
     return allRatings
   end
 
-
-
-
- # def self.all_ratings(val)
- #   allRatings = Array.new
- #   if val == nil
- #   	val = []
- #   end	
- #   val.each { |k, v|
- #     if allRatings and allRatings.length > 0
- #       allRatings &= Movie.filtered(val[k])
- #     else
- #       allRatings =Movie.filtered(val[k])
- #     end
-  #  }
- #   return allRatings
- # end
-
-
 end

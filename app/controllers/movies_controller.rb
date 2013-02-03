@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-
+#binding.pry
      @all_ratings = Movie.all_ratings
 
      @raits = if params[:ratings]
@@ -19,16 +19,17 @@ class MoviesController < ApplicationController
      end
     
 
-
-    if params[:sort] == "title"
+    if (session[:sort] == "title" && params[:sort] == nil) || params[:sort] == "title"
     
          @movies = Movie.order("title").where(rating: @raits)
          @title_header = 'hilite'
+         session[:sort] = "title"
     
-    elsif params[:sort] == 'release_date'
+    elsif (session[:sort] == "release_date" && params[:sort] == nil) || params[:sort] == "release_date"
       
          @movies = Movie.order("release_date").where(rating: @raits)
          @date_header = 'hilite'
+         session[:sort] = "release_date"
     else
     
          @movies = Movie.where(rating: @raits)
