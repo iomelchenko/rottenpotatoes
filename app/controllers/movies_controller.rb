@@ -50,7 +50,7 @@ class MoviesController < ApplicationController
         #flash.keep
         #redirect_to movies_path(@movies)
         #redirect_to :sort => sorted, :ratings => @raits and return
-        redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
+        #redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
       end
         
         #redirect_to movies_path(@movies)
