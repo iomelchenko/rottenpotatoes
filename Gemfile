@@ -10,7 +10,7 @@ gem 'pry'
 group :development, :test do
   gem 'sqlite3'
   #gem 'debugger'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
 end
 group :production do
   gem 'pg'

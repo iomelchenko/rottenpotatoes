@@ -44,7 +44,8 @@ class MoviesController < ApplicationController
 
 #binding.pry 
         @movies = Movie.order(sorted).where(rating: @raits)
-      if (session[:sort] != params[:sort] && params[:sort] != nil) || (session[:ratings] != params[:ratings] && params[:ratings] != nil)
+      #if (session[:sort] != params[:sort] && params[:sort] != nil) || (session[:ratings] != params[:ratings] && params[:ratings] != nil)
+      if session[:sort] != params[:sort] || session[:ratings] != params[:ratings]        
 
         session[:sort] = sorted 
         session[:ratings] = params[:ratings] 
@@ -52,7 +53,7 @@ class MoviesController < ApplicationController
         #flash.keep
         #redirect_to movies_path(@movies)
         #redirect_to :sort => sorted, :ratings => @raits and return
-        #redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
+        redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
       end
         
         #redirect_to movies_path(@movies)
